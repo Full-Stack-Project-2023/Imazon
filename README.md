@@ -1,2 +1,2 @@
 # Imazon
-# Kevin
+## Author: Winston Lin, Yinghui Sun, Kevin Yu
