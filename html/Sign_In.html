@@ -5,32 +5,37 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Imazon Sign In</title>
+    <!--CSS-->
     <link rel="stylesheet" href="/css/Sign_In.css">
+    <!--jQuery-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <!--JS-->
     <script src="/js/Sign_In.js"></script>
 </head>
 <body>
     <h1 class="name">Imazon</h1>
+    <!--Sign in div-->
     <div class="container">
         <h1>Sign In</h1>
-        <form>
-            <label for="email"><strong>Email</strong></label><br>
-            <input type="text" id="email" name="email"><br>
-            <label for="password"><strong>Password</strong></label>
-            <span id="forgot_password">
-                <a href="https://www.google.com"> Forgot your password? </a><br>
-            </span>
-            <input type="password" id="password" name="password" tabindex="2"><br>
-            <br>
-            <input type="submit" value="Sign in" class="orange_button">
+
+        <form id="sign_in_form" action="/index.html">
+            <!--Email-->
+            <label for="email"><strong> Email </strong></label>
+            <input type="text" id="email" name="email">
+
+            <!--Password-->
+            <label for="password"><strong> Password </strong></label>
+            <a id="forgot_password" href="https://www.google.com"> Forgot your password? </a>
+            <input type="password" id="password" name="password">
             <br><br>
-            <input type="checkbox" id="keep_sign_in" name="keep_sign_in" value="true">
-            <label for="keep_sign_in"> Keep me signed in. </label>
+
+            <input type="submit" value="Sign in" style="background-color: rgb(254, 208, 123);">
+            <br><br>
         </form>
-        
     </div>
+    <!--To sign up div-->
     <div class="container">
-        <h5 style="color: gray;">New to Imazon?</h5>
+        <h4 style="text-align: center; color: gray;">New to Imazon?</h4>
         <a href="shoppingweb.html"> 
             <button id="to_sign_up"> Create your Imazon account </button>
         </a>
