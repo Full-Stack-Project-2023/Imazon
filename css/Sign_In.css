@@ -1,51 +1,57 @@
 * {
     box-sizing: border-box;
 }
-h1, h5 {
+
+.name {
     text-align: center;
 }
-div h1 {
-    text-align: left;
-    margin: 0px 0px 15px 0px;
-}
-div {
+
+.container {
     width: 348px;
     margin: auto;
     font-size: 13px;
     line-height: 19px;
 }
+
+.container h1 {
+    text-align: left;
+    margin: 0px 0px 15px 0px;
+}
+
 .container:first-of-type {
-    border: 0.1em lightgray solid;
+    border: 1px lightgray solid;
     border-radius: 4px;
     padding: 20px 26px;
 }
+
+input, button {
+    border: 1px gray solid;
+    border-radius: 4px;
+}
+
 input {
     width: 296px;
     height: 31px;
     padding: 3px 7px;
-    border: 1px solid #a6a6a6;
-    border-radius: 3px;
-    box-shadow: 0 1px 0 rgb(255 255 255 / 50%), 0 1px 0 rgb(0 0 0 / 7%) inset;
 }
-input[type=checkbox] {
-    width: 13px;
-    height: 13px;
-}
-#forgot_password a {
+
+#forgot_password {
     float: right;
     text-decoration: none;
     color: blue;
 }
-.orange_button {
-    background-color: #f0c14b;
-    border: 0.1em lightgray solid;
-    border-color: #a88734 #9c7e31 #846a29;
-    border-radius: 4px;
+
+input[type=checkbox] {
+    width: 13px;
+    height: 13px;
+    margin: 0px;
 }
+
 button {
     width: 348px;
     height: 29px;
 }
+
 footer p {
     text-align: center;
 }
