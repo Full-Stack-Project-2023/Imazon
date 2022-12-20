@@ -6,8 +6,4 @@ $(document).ready(function(){
         //require JSON to read data
         alert("Where is home page?");
     });
-    //remove
-    $("#to_sign_up").click(function() {
-        alert("Where is sign up page?");
-    });
 });
