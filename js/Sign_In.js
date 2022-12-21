@@ -8,9 +8,10 @@ $(document).ready(function(){
         e.preventDefault();
         const email = $sign_in_form.find('input[name=email]').val();
         const password = $sign_in_form.find('input[name=password]').val();
-        //error
+        // error
         $.ajax({
-            url: '/Sign_In.html',
+            // url: './Sign_In.html',
+            url: '/test.json',
             method: 'POST',
             contentType: "text/json; charset=utf-8",
             data: JSON.stringify({
@@ -20,9 +21,9 @@ $(document).ready(function(){
         }).then(() => {
             alert('登录成功')
             location.assign('/index.html')
-        }, () => {
-            alert(`Email: ${email}\nPassword: ${password}`);
-            alert('失败')
+        }, (status) => {
+            alert(`Fail\nEmail: ${email}\nPassword: ${password}`);
+            console.log(status)
         })
     });
 });
