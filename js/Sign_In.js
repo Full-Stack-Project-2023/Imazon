@@ -10,8 +10,8 @@ $(document).ready(function(){
         const password = $sign_in_form.find('input[name=password]').val();
         // error
         $.ajax({
-            // url: './Sign_In.html',
-            url: '/test.json',
+            url: './Sign_In.html',
+            //url: '/test.json',
             method: 'POST',
             contentType: "text/json; charset=utf-8",
             data: JSON.stringify({
