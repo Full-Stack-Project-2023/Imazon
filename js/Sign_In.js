@@ -1,29 +1,39 @@
-$(document).ready(function(){
-    $(".name").click(function() {
+//Incomplete
+$(document).ready(function () {
+    $(".name").click(function () {
         window.location.href = "/index.html";
     });
 
     const $sign_in_form = $("#sign_in_form");
-    $sign_in_form.submit(function(e) {
+    let userInfoHash = {};
+    $sign_in_form.submit(function (e) {
         e.preventDefault();
-        const email = $sign_in_form.find('input[name=email]').val();
-        const password = $sign_in_form.find('input[name=password]').val();
-        // error
+        const findUser = ['email', 'password'];
+        findUser.forEach((key) => {
+            userInfoHash[key] = $(this).find(`input[name=${key}]`).val();
+        });
+
+        // $.post('./Sign_In.html', JSON.stringify(userInfoHash)
+        // ).then((response) => {
+        //     console.log(response)
+        // }, (response) => {
+        //     alert('post Fail')
+        //     console.log(response)
+        // }
+        // );
+
         $.ajax({
             url: './Sign_In.html',
-            //url: '/test.json',
             method: 'POST',
             contentType: "text/json; charset=utf-8",
-            data: JSON.stringify({
-                email: email,
-                password: password
-            })
+            data: JSON.stringify(userInfoHash)
         }).then(() => {
-            alert('登录成功')
+            alert('Success')
             location.assign('/index.html')
-        }, (status) => {
-            alert(`Fail\nEmail: ${email}\nPassword: ${password}`);
-            console.log(status)
+        }, (response) => {
+            alert(`ajax Fail\nEmail: ${userInfoHash['email']}\nPassword: ${userInfoHash['password']}`);
+            console.log(response);
         })
     });
+
 });
