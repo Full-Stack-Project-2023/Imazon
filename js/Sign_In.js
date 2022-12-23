@@ -1,14 +1,15 @@
 //Incomplete
 $(document).ready(function () {
     $(".name").click(function () {
-        window.location.href = "/index.html";
+        location.href = "/index.html";
     });
 
     const $sign_in_form = $("#sign_in_form");
-    let userInfoHash = {};
     $sign_in_form.submit(function (e) {
         e.preventDefault();
         const findUser = ['email', 'password'];
+        let userInfoHash = {};
+
         findUser.forEach((key) => {
             userInfoHash[key] = $(this).find(`input[name=${key}]`).val();
         });
@@ -19,8 +20,7 @@ $(document).ready(function () {
         // }, (response) => {
         //     alert('post Fail')
         //     console.log(response)
-        // }
-        // );
+        // })
 
         $.ajax({
             url: './Sign_In.html',
@@ -28,12 +28,11 @@ $(document).ready(function () {
             contentType: "text/json; charset=utf-8",
             data: JSON.stringify(userInfoHash)
         }).then(() => {
-            alert('Success')
-            location.assign('/index.html')
+            alert('Success');
+            location.assign('/index.html');
         }, (response) => {
             alert(`ajax Fail\nEmail: ${userInfoHash['email']}\nPassword: ${userInfoHash['password']}`);
             console.log(response);
-        })
+        });
     });
-
 });
