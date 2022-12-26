@@ -14,16 +14,8 @@ $(document).ready(function () {
             userInfoHash[key] = $(this).find(`input[name=${key}]`).val();
         });
 
-        // $.post('./Sign_In.html', JSON.stringify(userInfoHash)
-        // ).then((response) => {
-        //     console.log(response)
-        // }, (response) => {
-        //     alert('post Fail')
-        //     console.log(response)
-        // })
-
         $.ajax({
-            url: './Sign_In.html',
+            url: './Sign_In',
             method: 'POST',
             contentType: "text/json; charset=utf-8",
             data: JSON.stringify(userInfoHash)
