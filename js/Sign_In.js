@@ -1,4 +1,3 @@
-//Incomplete
 $(document).ready(function () {
     $(".name").click(function () {
         location.href = "/index.html";
