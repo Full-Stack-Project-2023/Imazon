@@ -1,22 +1,24 @@
+#navbar-main {
+    display: flex;
+    background-color: rgb(19, 25, 33);
+}
 #navigation {
     margin: 0%;
     padding: 0%;
 }
 
 #nav_belt {
+    display: flex;
     background-color: rgb(19, 25, 33);
 }
 
-.nav_fill, .nav_left, .nav_right {
-    display: inline;
-}
-
-.nav_belt {
-    
+.nav_fill .nav_left .nav_right {
+    display: flex;
+    position:static;
+    float: none;
 }
 
 .nav_left {
-    display: inherit;
     position: static;
     float: center;
     width: auto;
@@ -37,6 +39,14 @@
 
 .nav_right {
 
+}
+
+.nav_right {
+    margin-top: 1%;
+}
+.nav_right td {
+    color: rgb(204, 204, 204); 
+    font-size: 12px;
 }
 
 .nav_logo, .location_button {
