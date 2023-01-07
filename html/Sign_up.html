@@ -24,17 +24,17 @@
     }
 </style>
 <body>
-    <h1 style="padding-left: 50%; padding-bottom: 1%;">Imazon</h1>
+    <h1 style="padding-left: 50%; padding-bottom: 1%;" class="name">Imazon</h1>
     <div>
     <h2 style="padding-left: 5%; padding-bottom: 0%;">Create Account</h2>
-    <form style="padding-left: 5%;">
+    <form style="padding-left: 5%;" action="" method="post" id="form">
         <table cellpadding="0" cellspacing="0" border="0" class="form_table">
           <tr>
             <td style="padding-bottom: 2%;" valign="middle" align="left"><strong>Username:</strong></td>
             </tr>
             <tr>
             <td  style="padding-bottom: 8%;" valign ="middle" align="left">
-              <input type="text" class="inputgri" v-model="user.mallUserName"/>
+              <input type="text" name = "username" >
             </td>
             <!-- <td>
               <span class="error">{{userNameIsExist}}</span>
@@ -46,7 +46,7 @@
           </tr>
           <tr>
             <td  style="padding-bottom: 8%;" valign="middle" align="left">
-              <input type="text" class="inputgri" v-model="user.mallUserRealName" />
+              <input type="text" name = "yourname">
             </td>
             <td></td>
           </tr>
@@ -55,7 +55,7 @@
           </tr>
           <tr>
             <td valign="middle" align="left">
-              <input type="password" class="inputgri" v-model="user.mallUserPassword" />
+              <input type="text" name = "password">
               
             </td>
           </tr>
@@ -66,11 +66,11 @@
           </tr>
           
           <tr>
-            <td style="padding-bottom: 2%;" valign="middle" align="left"><strong> Password:</strong></td>
+            <td style="padding-bottom: 2%;" valign="middle" align="left"><strong> Re-enter Password:</strong></td>
           </tr>
           <tr>
             <td  style="padding-bottom: 8%;" valign="middle" align="left">
-              <input type="text" class="inputgri" v-model="verifyCode" valign="middle"/>
+              <input type="text" name = "repassword"valign="middle">
             </td>
             <!-- <td><span class="error">{{verifyError}}</span></td> -->
           </tr>
@@ -78,7 +78,7 @@
           <tr>
             
             <td style="padding-bottom: 20%;" valign="middle" align="left">
-              <input style="width: 155%; height: 35px; background-color: rgb(252, 195, 90);"type="button" class="button" value="sumit &raquo;"  @click="send()"/>
+              <button style="width: 155%; height: 35px; background-color: rgb(252, 195, 90);"type="submit">submit</button>
             </td>
             <td></td>
           </tr>
@@ -88,4 +88,40 @@
 </body>
 <footer style="background-color: rgb(247, 246, 244);">
 <h3 style="padding-top: 5%; padding-left: 38%;">Group Work by Yinghui, WenLin, Kevin</h3></footer>
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+  $(document).ready(function () {
+    $(".name").click(function () {
+        location.href = "/index.html";
+    });
+  
+    const $form = $("#form");
+    $form.on('submit', (e) => {
+        e.preventDefault()
+        const userid = $form.find('input[name=username]').val()
+        const yourname = $form.find('input[name=yourname]').val()
+        const password = $form.find('input[name=password]').val()
+        const repassword = $form.find('input[name=repassword]').val()
+        if(password == repassword){
+        $.ajax({
+            url: './registered.html',
+            method: 'POST',
+            contentType: "text/json; charset=utf-8",
+            data: JSON.stringify({ //一定要转化成JSON字符串再传
+                userid: userid,
+                yourname: yourname,
+                password: password
+            })
+        }).then(() => {
+            alert('Success')
+            location.href = '/index.html'
+        }, (response) => {
+            alert(`ajax Fail\nUseName: ${userid}\nyourname: ${yourname}\npassword: ${password}\nre-enter password: ${repassword}`);
+            console.log(response);
+        })
+      }
+    })
+  })
+</script>
+
 </html>
