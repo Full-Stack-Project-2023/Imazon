@@ -14,7 +14,7 @@ $(document).ready(function () {
         });
 
         $.ajax({
-            url: '/Sign_In.html',
+            url: './Sign_In.html',
             method: 'POST',
             contentType: "text/json; charset=utf-8",
             data: JSON.stringify(userInfoHash)
