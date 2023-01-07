@@ -14,16 +14,15 @@ $(document).ready(function () {
         });
 
         $.ajax({
-            url: './Sign_In',
+            url: '/Sign_In.html',
             method: 'POST',
             contentType: "text/json; charset=utf-8",
             data: JSON.stringify(userInfoHash)
         }).then(() => {
             alert('Success');
-            location.assign('/index.html');
-        }, (response) => {
-            alert(`ajax Fail\nEmail: ${userInfoHash['email']}\nPassword: ${userInfoHash['password']}`);
-            console.log(response);
+            location.href = "/index.html";
+        }, () => {
+            alert('Incorrect email or password');
         });
     });
 });

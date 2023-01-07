@@ -98,17 +98,17 @@
     const $form = $("#form");
     $form.on('submit', (e) => {
         e.preventDefault()
-        const userid = $form.find('input[name=username]').val()
+        const email = $form.find('input[name=username]').val()
         const yourname = $form.find('input[name=yourname]').val()
         const password = $form.find('input[name=password]').val()
         const repassword = $form.find('input[name=repassword]').val()
         if(password == repassword){
         $.ajax({
-            url: './registered.html',
+            url: '/registered.html',
             method: 'POST',
             contentType: "text/json; charset=utf-8",
             data: JSON.stringify({ //一定要转化成JSON字符串再传
-                userid: userid,
+                email: email,
                 yourname: yourname,
                 password: password
             })
