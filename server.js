@@ -6,7 +6,7 @@ var server = http.createServer(function (request, response) {
     var parseUrl = url.parse(request.url, true)
     var path = parseUrl.pathname
 
-    if (path === '/Sign_up.html' && request.method === 'POST') {
+    if (path === '/registered.html' && request.method === 'POST') {
         response.statusCode = 200
         response.setHeader('Content-type', 'text/html;charset=UTF-8')
         const ajaxdata = []
