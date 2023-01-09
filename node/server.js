@@ -16,7 +16,7 @@ var server = http.createServer(function (request, response) {
         request.on('end', () => {
             const string = Buffer.concat(ajaxdata).toString()
             const jsondata = JSON.parse(string)
-            const mysql = JSON.parse(fs.readFileSync('./mysql.json'))
+            const mysql = JSON.parse(fs.readFileSync('../db/mysql.json'))
             const newdata = {
                 email: jsondata.email,
                 password: jsondata.password
@@ -35,7 +35,7 @@ var server = http.createServer(function (request, response) {
         })
         request.on('end', () => {
             const arrdata = JSON.parse(arr)
-            let sql = JSON.parse(fs.readFileSync('./mysql.json'))
+            let sql = JSON.parse(fs.readFileSync('../db/mysql.json'))
             const n = sql.find((val) => {
                 return val.password === arrdata.password && val.email === arrdata.email
             })
@@ -60,7 +60,7 @@ var server = http.createServer(function (request, response) {
         }
         response.setHeader('Content-Type', `${type[suffix] || "text/html"};charset=utf-8`)
         try {
-            response.write(fs.readFileSync(`.${x}`));
+            response.write(fs.readFileSync(`..${x}`));
             response.statusCode = 200
         } catch {
             response.write('Nope, not toady.')
