@@ -3,8 +3,8 @@ const url = require('url');
 const fs = require('fs');
 
 http.createServer(function (request, response) {
-    var parseUrl = url.parse(request.url, true);
-    var path = parseUrl.pathname;
+    const parseUrl = url.parse(request.url, true);
+    const path = parseUrl.pathname;
 
     if (path === '/html/registered.html' && request.method === 'POST') {
         response.statusCode = 200;
@@ -48,7 +48,7 @@ http.createServer(function (request, response) {
     }
     else {
         const x = path === '/' ? '/index.html' : path;
-        let suffix = x.slice(x.lastIndexOf('.') + 1);
+        const suffix = x.slice(x.lastIndexOf('.') + 1);
         const type = {
             "html": "text/html",
             "css": "text/css",
