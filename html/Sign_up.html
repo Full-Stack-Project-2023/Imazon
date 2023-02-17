@@ -104,7 +104,7 @@
         const repassword = $form.find('input[name=repassword]').val()
         if(password == repassword){
         $.ajax({
-            url: './registered.html',
+            url: './Sign_up.html',
             method: 'POST',
             contentType: "text/json; charset=utf-8",
             data: JSON.stringify({ //一定要转化成JSON字符串再传
