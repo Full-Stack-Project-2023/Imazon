@@ -64,7 +64,7 @@ http.createServer(function (request, response) {
         }
         response.setHeader('Content-Type', `${type[suffix] || "text/html"};charset=utf-8`);
         try {
-            response.write(fs.readFileSync(`.${x}`));
+            response.write(fs.readFileSync(`..${x}`));
             response.statusCode = 200;
         } catch {
             response.write('Page 404');
