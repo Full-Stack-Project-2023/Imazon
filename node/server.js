@@ -14,12 +14,15 @@ var con = mysql.createConnection({
 });
 
 con.connect((err) => {
-    if (err) {
-        console.error('Error connecting to database:', err.stack);
-        return;
-    }
-    console.log('Connected to database as ID', con.threadId);
-});
+    if (err) throw err;
+    console.log('Connected!');
+    
+    // Rename the connection variable to 'con'
+    con.query('CREATE TABLE IF NOT EXISTS userInfo (email VARCHAR(255), password VARCHAR(255))', (err, result) => {
+      if (err) throw err;
+      console.log('Table created');
+    });
+  });
 
 //mysql
 http.createServer(function (request, response) {
@@ -54,7 +57,6 @@ http.createServer(function (request, response) {
             const arrdata = JSON.parse(ajaxdata);
             const sql = `SELECT * FROM userInfo WHERE email = '${arrdata.email}' AND password = '${arrdata.password}'`;
             con.query(sql, function (err, result) {
-                ;
                 if (err) throw err;
                 if (result[0] === undefined) {
                     response.statusCode = 400;
