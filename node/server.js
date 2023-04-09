@@ -3,12 +3,27 @@ const url = require('url');
 const fs = require('fs');
 const mysql = require('mysql');
 
+require('dotenv').config();
+
 var con = mysql.createConnection({
-    host: "localhost",
-    user: "root",
-    password: "29yu30",
-    database: "mydb"
+    host: process.env.RDS_HOST,
+    port: process.env.RDS_PORT,
+    user: process.env.RDS_USER,
+    password: process.env.RDS_PASSWORD,
+    database: process.env.RDS_DATABASE
 });
+
+con.connect((err) => {
+    if (err) throw err;
+    console.log('Connected!');
+    
+    // Rename the connection variable to 'con'
+    con.query('CREATE TABLE IF NOT EXISTS userInfo (email VARCHAR(255), password VARCHAR(255))', (err, result) => {
+      if (err) throw err;
+      console.log('Table created');
+    });
+  });
+
 //mysql
 http.createServer(function (request, response) {
     const parseUrl = url.parse(request.url, true);
@@ -41,7 +56,7 @@ http.createServer(function (request, response) {
         request.on('end', () => {
             const arrdata = JSON.parse(ajaxdata);
             const sql = `SELECT * FROM userInfo WHERE email = '${arrdata.email}' AND password = '${arrdata.password}'`;
-            con.query(sql, function (err, result) {;
+            con.query(sql, function (err, result) {
                 if (err) throw err;
                 if (result[0] === undefined) {
                     response.statusCode = 400;
