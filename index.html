@@ -1,14 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/Homepage.css">
-
+    <!--jQuery-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <!--favicon-->
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.png">
     <title>Imazon.com</title>
 </head>
+
 <body>
+    <!--nav section-->
     <header class="navbar-main">
         <div id="navigation">
             <div id="nav_belt">
@@ -25,7 +31,8 @@
                                     <td>
                                         <table style="display: inline;">
                                             <tr>
-                                                <td style="color: rgb(204, 204, 204); font-size: 12px;">Deliver to User</td>
+                                                <td style="color: rgb(204, 204, 204); font-size: 12px;">Deliver to User
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <td style="color: white; font-size: 14px;">Display Location</td>
@@ -52,10 +59,15 @@
                         </table>
                     </a>
                 </div>
+                <div id="cartDiv">
+                    <img id="cart" src="css/cart.png" alt="Cart Image">
+                </div>
+                <script src="js/cart.js"></script>
+
             </div>
         </div>
-        
-        
+
+
         <div class="main_menu">
             <a href="https://www.google.com">
                 <img src="css/menu_icon.png" class="menu_icon">
@@ -72,6 +84,15 @@
         </div>
     </header>
 
-    <h1>Test</h1>
+    <!--body section-->
+    <div id="body">
+        <h1 style="text-align: center;">Products</h1>
+        <div id="product-grid"></div>
+
+        <script src="js/ProductCard.js"></script>
+        <script src="js/RenderCard.js"></script>
+    </div>
+
 </body>
+
 </html>
