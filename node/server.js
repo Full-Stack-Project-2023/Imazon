@@ -16,13 +16,13 @@ var con = mysql.createConnection({
 con.connect((err) => {
     if (err) throw err;
     console.log('Connected!');
-    
+
     // Rename the connection variable to 'con'
-    con.query('CREATE TABLE IF NOT EXISTS userInfo (email VARCHAR(255), password VARCHAR(255))', (err, result) => {
-      if (err) throw err;
-      console.log('Table created');
+    con.query('CREATE TABLE IF NOT EXISTS userInfo (name VARCHAR(255), email VARCHAR(255), password VARCHAR(255))', (err, result) => {
+        if (err) throw err;
+        console.log('Table created');
     });
-  });
+});
 
 //mysql
 http.createServer(function (request, response) {
@@ -39,7 +39,8 @@ http.createServer(function (request, response) {
         request.on('end', () => {
             const string = Buffer.concat(ajaxdata).toString();
             const jsondata = JSON.parse(string);
-            const sql = `INSERT INTO userInfo (email, password) VALUE ('${jsondata.email}', '${jsondata.password}')`;
+            const sql = `INSERT INTO userInfo (name, email, password) 
+                VALUE ('${jsondata.yourname}', '${jsondata.email}', '${jsondata.password}')`;
             con.query(sql, function (err, result) {
                 if (err) throw err;
                 console.log("Sign up success");
@@ -62,6 +63,9 @@ http.createServer(function (request, response) {
                     response.statusCode = 400;
                 } else {
                     response.statusCode = 200;
+                    response.setHeader('Content-Type', 'application/json');
+                    const name = result[0].name;
+                    response.end(JSON.stringify({ name }));
                 }
                 response.end();
             });
