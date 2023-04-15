@@ -5,7 +5,8 @@ $(document).ready(function() {
         'id': product.id,
         'title': product.title,
         'price': product.price,
-        'image': product.image
+        'image': product.image,
+        'type' : 'home'
       });
       $('#product-grid').append($productCard);
     });

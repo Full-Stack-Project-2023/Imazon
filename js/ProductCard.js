@@ -6,7 +6,7 @@ class ProductCard extends HTMLElement {
   }
 
   static get observedAttributes() {
-    return ['id', 'title', 'price', 'image'];
+    return ['id', 'title', 'price', 'image', 'type'];
   }
 
   attributeChangedCallback(name, oldValue, newValue) {
@@ -18,6 +18,28 @@ class ProductCard extends HTMLElement {
     const title = this.getAttribute('title');
     const price = this.getAttribute('price');
     const image = this.getAttribute('image');
+    const type = this.getAttribute('type');
+    let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+
+    const cartItem = cart.find(item => item.id === id);
+    let quantity = 1;
+    if (cartItem) {
+      quantity = cartItem.quantity;
+    }
+
+    let addToCartButton = `
+      <button id="add-to-cart-${id}">Add to Cart</button>
+    `;
+
+    if (type === 'cart') {
+      addToCartButton = `
+        <div>
+          <p>Quantity: <span id="quantity-${id}">1</span></p>
+          <button id="decrease-quantity-${id}" class="change">-</button>
+          <button id="increase-quantity-${id}" class="change">+</button>
+        </div>
+      `;
+    }
 
     this.shadowRoot.innerHTML = `
       <style>
@@ -29,6 +51,8 @@ class ProductCard extends HTMLElement {
         padding: 10px;
         text-align: center;
         height: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
       }
       
       .product-card img {
@@ -56,17 +80,74 @@ class ProductCard extends HTMLElement {
         <div class="product-info">
           <h3>${title}</h3>
           <p>$${price}</p>
-          <button id="add-to-cart-${id}">Add to Cart</button>
+          ${addToCartButton}
         </div>
       </div>
     `;
 
-    const $addToCartButton = this.shadowRoot.querySelector(`#add-to-cart-${id}`);
-    $addToCartButton.addEventListener('click', () => {
-      const cart = JSON.parse(localStorage.getItem('cart') || '[]');
-      cart.push({ id, title, price, image });
-      localStorage.setItem('cart', JSON.stringify(cart));
-    });
+    if (type === 'cart') {
+      const $quantity = this.shadowRoot.querySelector(`#quantity-${id}`);
+      const $decreaseButton = this.shadowRoot.querySelector(`#decrease-quantity-${id}`);
+      const $increaseButton = this.shadowRoot.querySelector(`#increase-quantity-${id}`);
+
+      $quantity.textContent = quantity;
+
+      function updateTotalPrice() {
+        let totalPrice = 0;
+        $('product-card').each(function () {
+          const $productCard = $(this);
+          const price = parseFloat($productCard.attr('price'));
+          const itemId = $productCard.attr('id');
+          const storedItem = cart.find(item => item.id === itemId);
+          const quantity = storedItem ? parseFloat(storedItem.quantity) : 0;
+          totalPrice += price * quantity;
+        });
+        $('p.total-price').text('Total Price: ' + totalPrice.toFixed(2));
+      }
+
+      $decreaseButton.addEventListener('click', () => {
+        cart = JSON.parse(localStorage.getItem('cart') || '[]');
+        const cartItem = cart.find(item => item.id === id);
+        cartItem.quantity = cartItem.quantity - 1;
+        $quantity.textContent = cartItem.quantity;
+        localStorage.setItem('cart', JSON.stringify(cart));
+        updateTotalPrice();
+        if (cartItem.quantity == 0) {
+          const index = cart.findIndex(item => item.id === id);
+          if (index !== -1) {
+            cart.splice(index, 1);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            $(`#${id}`).remove();
+          }
+        }
+      });
+
+      $increaseButton.addEventListener('click', () => {
+        cart = JSON.parse(localStorage.getItem('cart') || '[]');
+        const cartItem = cart.find(item => item.id === id);
+        if (cartItem) {
+          cartItem.quantity = cartItem.quantity + 1;
+          $quantity.textContent = cartItem.quantity;
+        } 
+        localStorage.setItem('cart', JSON.stringify(cart));
+        updateTotalPrice();
+      });
+    } else {
+      const $addToCartButton = this.shadowRoot.querySelector(`#add-to-cart-${id}`);
+      $addToCartButton.addEventListener('click', () => {
+        let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+        let cartItem = cart.find(item => item.id === id);
+
+        if (cartItem) {
+          cartItem.quantity += 1;
+        } else {
+          cartItem = { id, title, price, image, quantity: 1 };
+          cart.push(cartItem);
+        }
+
+        localStorage.setItem('cart', JSON.stringify(cart));
+      });
+    }
   }
 }
 

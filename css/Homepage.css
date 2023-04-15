@@ -6,41 +6,42 @@
 #navigation {
     margin: 0%;
     padding: 0%;
-
 }
 
 #nav_belt {
-    display: flex;
+    display: grid;
+    grid-template-columns: auto auto 50% auto auto;
     background-color: rgb(19, 25, 33);
+    padding-left: 3%;
 }
 
-.nav_fill .nav_left .nav_right {
-    display: flex;
-    position: static;
-    float: none;
+body {
+    margin: 0;
 }
 
-.nav_left {
-    position: static;
-    float: center;
-    width: auto;
-    height: 60px;
+.bar {
+    margin: 0 auto;
+    padding-top: 2%;
 }
 
+.searchbar {
+    height: 4vh;
+    width: 40vw;
+    font-size: 16px;
+    outline: none;
+    border-radius: 20px;
 
-.nav_left a {
-    font-size: 32px;
-    color: white;
+}
+
+.voice {
+    height: 20px;
+    position: relative;
+    top: 5px;
+    left: 10px;
+}
+
+a {
     text-decoration: none;
-}
-
-
-.nav_fill {}
-
-.nav_right {}
-
-.nav_right {
-    margin-top: 1%;
 }
 
 .nav_right td {
@@ -110,13 +111,13 @@
 
 #product-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(6, 1fr);
     grid-gap: 20px;
 }
 
 @media (max-width: 900px) {
     #product-grid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(3, 1fr);
     }
 }
 
@@ -126,7 +127,75 @@
     }
 }
 
-#cartDiv img { 
+#cartDiv img {
     position: absolute;
-    right:10px;
+    right: 10px;
+}
+
+/*cart*/
+.cart {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+.item {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+}
+
+.item img {
+    max-width: 5%;
+    height: auto;
+    margin-right: 10px;
+}
+
+#body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.buy {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.buy:hover {
+    background-color: #0069d9;
+}
+
+
+.item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.item img {
+    width: 100px;
+    margin-right: 1rem;
+}
+
+.item p {
+    margin: 0;
+}
+
+.order {
+    margin-right: 1rem;
+}
+
+.price {
+    margin-left: auto;
 }
