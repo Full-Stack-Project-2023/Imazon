@@ -25,7 +25,7 @@ con.connect((err) => {
 });
 
 //mysql
-http.createServer(function (request, response) {
+const server = http.createServer(function (request, response) {
     const parseUrl = url.parse(request.url, true);
     const path = parseUrl.pathname;
 
@@ -91,4 +91,10 @@ http.createServer(function (request, response) {
         }
         response.end();
     }
-}).listen(8080);
+});
+
+const port = process.env.PORT || 3000;
+
+server.listen(port, () => {
+  console.log(`Server listening on port ${port}`);
+});

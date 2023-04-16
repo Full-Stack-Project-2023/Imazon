@@ -1,0 +1,32 @@
+* {
+    box-sizing: border-box;
+}
+
+.container {
+    width: 348px;
+    margin: auto;
+    font-size: 13px;
+    line-height: 19px;
+}
+
+.container:first-of-type {
+    border: 1px lightgray solid;
+    border-radius: 4px;
+    padding: 20px 26px;
+}
+
+input, button {
+    border: 1px gray solid;
+    border-radius: 4px;
+}
+
+input {
+    width: 296px;
+    height: 31px;
+    padding: 3px 7px;
+}
+
+button {
+    width: 348px;
+    height: 29px;
+}

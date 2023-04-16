@@ -1,127 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Imazon Sign Up</title>
+  <!--CSS-->
+  <link rel="stylesheet" href="/css/Sign_up.css">
+  <!--jQuery-->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+  <!--JS-->
+  <script src="../js/Sign_up.js"></script>
 </head>
-<style>
-    div {
-        border: 3px groove rgb(255, 255, 255);
-        margin-left: 40%;
-        margin-right: 30%;
-    }
-    input {
-      width: 150%;
-      height: 25px;
-      border: 3px groove white;
-      border-radius: 5%;
-    }
-    footer {
-      width: 110%;
-      height: 450px;
-    }
-</style>
+
 <body>
-    <h1 style="padding-left: 50%; padding-bottom: 1%;" class="name">Imazon</h1>
-    <div>
-    <h2 style="padding-left: 5%; padding-bottom: 0%;">Create Account</h2>
-    <form style="padding-left: 5%;" action="" method="post" id="form">
-        <table cellpadding="0" cellspacing="0" border="0" class="form_table">
-          <tr>
-            <td style="padding-bottom: 2%;" valign="middle" align="left"><strong>Username:</strong></td>
-            </tr>
-            <tr>
-            <td  style="padding-bottom: 8%;" valign ="middle" align="left">
-              <input type="text" name = "username" >
-            </td>
-            <!-- <td>
-              <span class="error">{{userNameIsExist}}</span>
-            </td> -->
-            
-          </tr>
-          <tr>
-            <td style="padding-bottom: 2%;"valign="middle" align="left"><strong>Yourname:</strong></td>
-          </tr>
-          <tr>
-            <td  style="padding-bottom: 8%;" valign="middle" align="left">
-              <input type="text" name = "yourname">
-            </td>
-            <td></td>
-          </tr>
-          <tr>
-            <td style="padding-bottom: 2%;" valign="middle" align="left"><strong>Password:</strong></td>
-          </tr>
-          <tr>
-            <td valign="middle" align="left">
-              <input type="text" name = "password">
-              
-            </td>
-          </tr>
-          <tr>
-            <td  style="padding-bottom: 8%;"><small>Password must be at least 6 characters</small></td>
-            
-            <td></td>
-          </tr>
-          
-          <tr>
-            <td style="padding-bottom: 2%;" valign="middle" align="left"><strong> Re-enter Password:</strong></td>
-          </tr>
-          <tr>
-            <td  style="padding-bottom: 8%;" valign="middle" align="left">
-              <input type="text" name = "repassword"valign="middle">
-            </td>
-            <!-- <td><span class="error">{{verifyError}}</span></td> -->
-          </tr>
-          
-          <tr>
-            
-            <td style="padding-bottom: 20%;" valign="middle" align="left">
-              <button style="width: 155%; height: 35px; background-color: rgb(252, 195, 90);"type="submit">submit</button>
-            </td>
-            <td></td>
-          </tr>
-        </table>
-    </div>
-    
+  <h1 class="name" style="text-align: center;">Imazon</h1>
+  <!--Sign in div-->
+  <div class="container">
+    <h1 style="margin: 0px 0px 15px 0px;">Sign Up</h1>
+
+    <form id="form">
+
+      <label for="yourname"><strong> Name </strong></label>
+      <input type="text" id="yourname" name="yourname">
+      <!--Email-->
+      <label for="username"><strong> Username </strong></label>
+      <input type="text" id="username" name="username">
+      <!--Password-->
+      <label for="password"><strong> Password </strong></label>
+      <input type="text" id="password" name="password">
+
+      <label for="repassword"><strong> Re Password </strong></label>
+      <input type="text" id="repassword" name="repassword">
+
+      <br><br>
+
+      <input type="submit" value="Sign in" style="background-color: rgb(254, 208, 123);">
+      <br><br>
+    </form>
+  </div>
+  <!--To sign up div-->
+
+  <footer>
+    <hr>
+    <p style="text-align: center;">&copy 1996-2022, Imazon.com, Inc. or its affiliates</p>
+  </footer>
 </body>
-<footer style="background-color: rgb(247, 246, 244);">
-<h3 style="padding-top: 5%; padding-left: 38%;">Group Work by Yinghui, WenLin, Kevin</h3></footer>
-<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script>
-  $(document).ready(function () {
-    $(".name").click(function () {
-        location.href = "/index.html";
-    });
-  
-    const $form = $("#form");
-    $form.on('submit', (e) => {
-        e.preventDefault()
-        const email = $form.find('input[name=username]').val()
-        const yourname = $form.find('input[name=yourname]').val()
-        const password = $form.find('input[name=password]').val()
-        const repassword = $form.find('input[name=repassword]').val()
-        if(password == repassword){
-        $.ajax({
-            url: './Sign_up.html',
-            method: 'POST',
-            contentType: "text/json; charset=utf-8",
-            data: JSON.stringify({ //一定要转化成JSON字符串再传
-                email: email,
-                yourname: yourname,
-                password: password
-            })
-        }).then(() => {
-            alert('Success')
-            location.href = '/index.html'
-        }, (response) => {
-            alert(`ajax Fail\nUseName: ${userid}\nyourname: ${yourname}\npassword: ${password}\nre-enter password: ${repassword}`);
-            console.log(response);
-        })
-      }
-    })
-  })
-</script>
 
 </html>
