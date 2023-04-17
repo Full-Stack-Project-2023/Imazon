@@ -44,25 +44,27 @@ const server = http.createServer(function (request, response) {
                 if (result[0] != undefined) {
                     response.statusCode = 400;
                     response.end('Username already exists');
-                }
-            });
-            sql = `INSERT INTO userInfo (name, email, password) 
-            VALUE ('${jsondata.yourname}', '${jsondata.email}', '${jsondata.password}')`;
-            con.query(sql, function (err, result) {
-                if (err) {
-                    if (err.code === 'ER_DUP_ENTRY') {
-                        response.statusCode = 400;
-                        response.end('Username already exists');
-                    } else {
-                        throw err;
-                    }
                 } else {
-                    console.log("Sign up success");
-                    response.end();
+                    sql = `INSERT INTO userInfo (name, email, password) 
+        VALUE ('${jsondata.yourname}', '${jsondata.email}', '${jsondata.password}')`;
+                    con.query(sql, function (err, result) {
+                        if (err) {
+                            if (err.code === 'ER_DUP_ENTRY') {
+                                response.statusCode = 400;
+                                response.end('Username already exists');
+                            } else {
+                                throw err;
+                            }
+                        } else {
+                            console.log("Sign up success");
+                            response.end();
+                        }
+                    });
                 }
             });
         });
     }
+
     else if (path === '/html/Sign_In.html' && request.method === 'POST') {
         response.setHeader('Content-type', 'text/html;charset=UTF-8');
         const ajaxdata = [];
