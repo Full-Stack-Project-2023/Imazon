@@ -6,11 +6,11 @@ $(document).ready(function () {
     const $form = $("#form");
     $form.on('submit', (e) => {
         e.preventDefault()
-        const email = $form.find('input[name=username]').val()
-        const yourname = $form.find('input[name=yourname]').val()
-        const password = $form.find('input[name=password]').val()
-        const repassword = $form.find('input[name=repassword]').val()
-        if (password == repassword) {
+        const email = $form.find('input[name=username]').val().trim()
+        const yourname = $form.find('input[name=yourname]').val().trim()
+        const password = $form.find('input[name=password]').val().trim()
+        const repassword = $form.find('input[name=repassword]').val().trim()
+        if (password == repassword && email != "" && yourname != "" && password != "") {
             $.ajax({
                 url: './Sign_up.html',
                 method: 'POST',
@@ -22,11 +22,13 @@ $(document).ready(function () {
                 })
             }).then(() => {
                 alert('Success')
-                location.href = '/index.html'
-            }, (response) => {
-                alert(`ajax Fail\nUseName: ${userid}\nyourname: ${yourname}\npassword: ${password}\nre-enter password: ${repassword}`);
-                console.log(response);
+                location.href = '/html/Sign_In.html'
+            }, () => {
+                alert('Username already exist');
             })
+        }
+        else {
+            alert("Incorrect Input!");
         }
     })
 });

@@ -17,7 +17,7 @@ $(document).ready(function () {
                 const quantity = storedItem ? parseFloat(storedItem.quantity) : 0;
                 totalPrice += price * quantity;
             });
-            $('p.total-price').text('Total Price: ' + totalPrice.toFixed(2));
+            $('p.total-price').text('Total Price: $' + totalPrice.toFixed(2));
         }
 
         // Loop through items and append to body using product-card
@@ -49,5 +49,11 @@ $(document).ready(function () {
         // Call updateTotalPrice once at the beginning to set the correct total price
         updateTotalPrice();
 
+        $('.buy').on('click', function () {
+            alert('Thank You');
+            $productGrid.empty(); // clear the items in the $product-grid
+            localStorage.removeItem('cart');
+            $('p.total-price').text('Total Price: $0.00'); // change the total price to 0
+        });
     });
 });
