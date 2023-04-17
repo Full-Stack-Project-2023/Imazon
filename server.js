@@ -30,7 +30,6 @@ const server = http.createServer(function (request, response) {
     const path = parseUrl.pathname;
 
     if (path === '/html/Sign_up.html' && request.method === 'POST') {
-        response.statusCode = 200;
         response.setHeader('Content-type', 'text/html;charset=UTF-8');
         const ajaxdata = [];
         request.on('data', (data) => {
@@ -39,14 +38,30 @@ const server = http.createServer(function (request, response) {
         request.on('end', () => {
             const string = Buffer.concat(ajaxdata).toString();
             const jsondata = JSON.parse(string);
-            const sql = `INSERT INTO userInfo (name, email, password) 
-                VALUE ('${jsondata.yourname}', '${jsondata.email}', '${jsondata.password}')`;
+            let sql = `SELECT * FROM userInfo WHERE email = '${jsondata.email}'`;
             con.query(sql, function (err, result) {
                 if (err) throw err;
-                console.log("Sign up success");
+                if (result[0] != undefined) {
+                    response.statusCode = 400;
+                    response.end('Username already exists');
+                }
             });
-            response.end();
-        })
+            sql = `INSERT INTO userInfo (name, email, password) 
+            VALUE ('${jsondata.yourname}', '${jsondata.email}', '${jsondata.password}')`;
+            con.query(sql, function (err, result) {
+                if (err) {
+                    if (err.code === 'ER_DUP_ENTRY') {
+                        response.statusCode = 400;
+                        response.end('Username already exists');
+                    } else {
+                        throw err;
+                    }
+                } else {
+                    console.log("Sign up success");
+                    response.end();
+                }
+            });
+        });
     }
     else if (path === '/html/Sign_In.html' && request.method === 'POST') {
         response.setHeader('Content-type', 'text/html;charset=UTF-8');
@@ -96,5 +111,5 @@ const server = http.createServer(function (request, response) {
 const port = process.env.PORT || 3000;
 
 server.listen(port, () => {
-  console.log(`Server listening on port ${port}`);
+    console.log(`Server listening on port ${port}`);
 });
