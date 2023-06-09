@@ -1,11 +1,11 @@
 if (sessionStorage.getItem('name')) {
     sessionStorage.removeItem('name');
-    location.href = "/index.html";
+    location.href = "../index.html";
 }
 
 $(document).ready(function () {
     $(".name").click(function () {
-        location.href = "/index.html";
+        location.href = "../index.html";
     });
 
     const $sign_in_form = $("#sign_in_form");
