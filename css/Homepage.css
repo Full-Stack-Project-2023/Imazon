@@ -1,5 +1,3 @@
-
-
 #navigation {
     margin: 0%;
     padding: 0%;
@@ -16,29 +14,13 @@ body {
     margin: 0;
 }
 
-.bar {
-    margin: 0 auto;
-    padding-top: 2%;
-}
-
-.searchbar {
-    height: 4vh;
-    width: 40vw;
-    font-size: 16px;
-    outline: none;
-    border-radius: 20px;
-
-}
-
-.voice {
-    height: 20px;
-    position: relative;
-    top: 5px;
-    left: 10px;
-}
-
 a {
     text-decoration: none;
+}
+
+.nav_right {
+    display: flex;
+    align-items: center;
 }
 
 .nav_right td {
@@ -55,16 +37,6 @@ a {
     width: 15px;
     display: inline;
 }
-
-
-
-
-
-
-
-
-
-
 
 .main_menu {
     background-color: rgb(35, 47, 62);
